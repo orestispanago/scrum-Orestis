@@ -7,28 +7,17 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.QuestionPossibleAnswers;
-import models.User;
-import models.UserAnswers;
-import services.ExamImpl;
 
 /**
  *
  * @author Walter
  */
 public class Exam extends HttpServlet {
-    ExamImpl examService;
-    
-    public Exam(){
-        examService = new ExamImpl();
-    }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -67,12 +56,9 @@ public class Exam extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Get questions from databse (get dummy data for now)
-        List<QuestionPossibleAnswers> questionsWithPossibleAnswers = examService.getQuestionsWithPossibleAnswers();
+        processRequest(request, response);
+        // Get questions from databse
         // Send questions to front
-        request.setAttribute("questionsWithPossibleAnswers", questionsWithPossibleAnswers);
-        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-        rd.forward(request, response);
     }
 
     /**
@@ -87,17 +73,7 @@ public class Exam extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get user and selected answers from parameters
-        UserAnswers userAnswers = (UserAnswers)request.getAttribute("userAnswers");
-        User user = userAnswers.getUser();
         // Save to db via the examService
-        examService.saveUser(user);
-        examService.saveUserSelectedAnswers(userAnswers);
-       
-        // Get Results
-        examService.getResult(user);
-        // Forward to index.jsp
-        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-        rd.forward(request, response);
     }
 
     /**

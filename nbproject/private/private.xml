@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrumDB/src/java/controllers/Exam.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrumDB/src/java/models/QuestionSelectedAnswer.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrumDB/src/java/models/Answer.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrumDB/src/java/models/UserAnswers.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrumDB/src/java/models/QuestionRightAnswer.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrumDB/src/java/services/IExam.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrumDB/src/java/models/Question.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrumDB/src/java/dao/Orestis.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrumDB/src/java/models/QuestionPossibleAnswers.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrumDB/src/java/models/Result.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
