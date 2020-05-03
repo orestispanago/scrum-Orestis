@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class Database {
 
     private static final String DB_URL = "ra1.anystream.eu:3012";
-    private static final String FULL_DB_URL = "jdbc:mysql://" + DB_URL + "/scrum?zeroDateTimeBehavior=convertToNull";
+    private static final String FULL_DB_URL = "jdbc:mysql://" + DB_URL + "/scrum?zeroDateTimeBehavior=convertToNull&useSSL=false";
     private static final String DB_USER = "root";
     private static final String DB_PASSWD = "AFDEmp_MySQL1";
     private static Connection connection = null;

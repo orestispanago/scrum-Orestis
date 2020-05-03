@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.QuestionPossibleAnswers;
+import models.QuestionSelectedAnswer;
 import models.User;
 import models.UserAnswers;
 import services.ExamImpl;
@@ -76,6 +77,13 @@ public class Exam extends HttpServlet {
         User u1 = new User();
         u1.setUsername("UserName");
         examService.saveUser(u1);
+        
+        models.UserAnswers userAnswers = new models.UserAnswers();
+        List<QuestionSelectedAnswer> selectedAnswers = DummyData.DummyData.getQuestionsWithSelectedAnswers();
+        userAnswers.setUser(u1);
+        userAnswers.setSelectedAnswers(selectedAnswers);
+        examService.saveUserSelectedAnswers(userAnswers);
+            
     }
 
     /**
