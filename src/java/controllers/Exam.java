@@ -7,18 +7,11 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.QuestionPossibleAnswers;
 import models.User;
 import models.UserAnswers;
 import services.ExamImpl;
@@ -75,6 +68,7 @@ public class Exam extends HttpServlet {
             throws ServletException, IOException {
         // Get questions from databse (get dummy data for now)
 //        List<QuestionPossibleAnswers> questionsWithPossibleAnswers = examService.getQuestionsWithPossibleAnswers();
+//        dao.QuestionPossibleAnswers qa = new dao.QuestionPossibleAnswers();
         dao.QuestionPossibleAnswers.printOne();
     }
 

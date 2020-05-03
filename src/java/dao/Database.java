@@ -19,20 +19,43 @@ public class Database {
     private static Statement statement = null;
     private static PreparedStatement pst = null;
 
-    public Database() {
+    public Database(){
         getConnection();
     }
 
-    public static Connection getConnection() {
+//    public static Connection getConnection() {
+//        try {
+//            try {
+//                Class.forName("com.mysql.cj.jdbc.Driver");
+//            } catch (ClassNotFoundException ex) {
+//                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            connection = DriverManager.getConnection(FULL_DB_URL, DB_USER, DB_PASSWD);
+//            return connection;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+//            return null;
+//        }
+//    }
+
+       public static Connection getConnection() {
         try {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("***************** GETCONNECTION EXECUTED");
             connection = DriverManager.getConnection(FULL_DB_URL, DB_USER, DB_PASSWD);
+            System.out.println("***************** GETCONNECTION returns connection value: " + connection);
             return connection;
         } catch (SQLException ex) {
+            System.out.println("********************* ERROR IN GETCONNECTION");
+            System.out.println("");
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
-
     public static ResultSet getResults(String query) { // query = "SELECT * FROM Customers"
         try {
             setStatement();

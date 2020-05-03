@@ -9,13 +9,18 @@ import java.util.logging.Logger;
 
 public class QuestionPossibleAnswers {
 
-    
+    private static Database db = new Database();
+//        private  Database db;
+//   
+//    public QuestionPossibleAnswers(){
+//        db = new Database();
+//    }
     private static ResultSet getAll() {
-        return Database.getResults("SELECT * FROM questions ORDER BY id");
+        return db.getResults("SELECT * FROM questions ORDER BY id");
     }
 
     private static ResultSet getById(int id) {
-        return Database.getResults(
+        return db.getResults(
                 "SELECT \n"
                 + "    text_quest, text_ans\n"
                 + "FROM\n"
@@ -28,11 +33,11 @@ public class QuestionPossibleAnswers {
 
     public static void printOne() {
         ResultSet rs = getById(1);
-        String question="";
+        String question = "";
         String ans;
         List<String> answers = new ArrayList();
         try {
-            if(rs.next()){
+            if (rs.next()) {
                 question = rs.getString(1);
                 ans = rs.getString(2);
                 answers.add(ans);
