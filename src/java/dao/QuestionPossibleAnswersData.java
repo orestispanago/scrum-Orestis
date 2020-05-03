@@ -12,11 +12,6 @@ import models.Question;
 public class QuestionPossibleAnswersData {
 
     private static Database db = new Database();
-//        private  Database db;
-//   
-//    public QuestionPossibleAnswersData(){
-//        db = new Database();
-//    }
 
     private static ResultSet getAll() {
         return db.getResults("SELECT * FROM questions ORDER BY id");
@@ -33,28 +28,6 @@ public class QuestionPossibleAnswersData {
                 + "    questions.id = answers.question_id\n"
                 + "        AND questions.id = " + id + ";");
     }
-
-//    public static void printOne() {
-//        ResultSet rs = getById(1);
-//        String question = "";
-//        String ans;
-//        List<String> answers = new ArrayList();
-//        try {
-//            if (rs.next()) {
-//                question = rs.getString(1);
-//                ans = rs.getString(2);
-//                answers.add(ans);
-//            }
-//            while (rs.next()) {
-//                ans = rs.getString(2);
-//                answers.add(ans);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        System.out.println(question);
-//        System.out.println(answers);
-//    }
 
     public static models.QuestionPossibleAnswers getOne(int id) {
         ResultSet rs = getById(id);

@@ -9,6 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Answer;
 import models.Question;
+import models.QuestionSelectedAnswer;
+import models.User;
 
 public class QuestionSelectedAnswersData {
 
@@ -19,15 +21,38 @@ public class QuestionSelectedAnswersData {
 //        db = new Database();
 //    }
 
-    private static ResultSet getAll() {
-        return db.getResults("SELECT * FROM questions ORDER BY id");
+    private static ResultSet selectAll(User user) {
+        return db.getResults("select q.text_quest, a.text_ans from users_answers ua\n"
+                + "join answers a on a.id = ua.answer_id\n"
+                + "join questions q on q.id = a.question_id\n"
+                + "WHERE ua.user_id=" + user.getId()+";");
     }
-    
+
+    public static List<models.QuestionSelectedAnswer> getAll(User user) {
+        ResultSet rs = selectAll(user);
+        QuestionSelectedAnswer qsa = new QuestionSelectedAnswer();
+        List<models.QuestionSelectedAnswer> qsaList = new ArrayList();
+        try {
+            while (rs.next()) {
+                Answer answer = new Answer();
+                Question question = new Question();
+                answer.setText(rs.getString(1));
+                question.setText(rs.getString(2));
+                qsa.setQuestion(question);
+                qsa.setSelectedAnswer(answer);
+                qsaList.add(qsa);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return qsaList;
+    }
+
     public static boolean insertOneRow(models.User user, models.Answer answer) {
         int lastInsertId = 0;
         int result = 0;
         String sql = "INSERT INTO users_answers(user_id, answer_id) "
-                        + "VALUES ( ? ,?)";
+                + "VALUES ( ? ,?)";
         db.setPreparedStatementWithKeys(sql);
         PreparedStatement pst = db.getPreparedStatement();
         try {
@@ -53,45 +78,5 @@ public class QuestionSelectedAnswersData {
         }
         return false;
     }
-
-
-    
-    
-    
-    
-    
-    
-//    public static models.QuestionPossibleAnswers getOne(int id) {
-//        ResultSet rs = getById(id);
-//        Question question = new Question();
-//        List<Answer> answers = new ArrayList();
-//        int ans_id;
-//        try {
-//            if (rs.next()) {
-//                int quest_id = rs.getInt(1);
-//                question.setId(quest_id);
-//                question.setText(rs.getString(2));
-//
-//                Answer answer = new Answer();
-//                ans_id = rs.getInt(3);
-//                answer.setId(ans_id);
-//                answer.setText(rs.getString(4));
-//                answers.add(answer);
-//            }
-//            while (rs.next()) {
-//                Answer answer = new Answer();
-//                ans_id = Integer.parseInt(rs.getString(3));
-//                answer.setId(ans_id);
-//                answer.setText(rs.getString(4));
-//                answers.add(answer);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        System.out.println(question);
-//        System.out.println(answers);
-//        models.QuestionPossibleAnswers qpa = new models.QuestionPossibleAnswers(question, answers);
-//        return qpa;
-//    }
 
 }

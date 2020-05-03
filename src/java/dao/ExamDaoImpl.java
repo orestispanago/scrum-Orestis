@@ -4,6 +4,7 @@ import static dao.QuestionPossibleAnswersData.getOne;
 import java.util.ArrayList;
 import java.util.List;
 import models.QuestionPossibleAnswers;
+import models.QuestionRightAnswer;
 import models.QuestionSelectedAnswer;
 import models.Result;
 import models.User;
@@ -44,7 +45,17 @@ public class ExamDaoImpl implements IExamDao {
 
     @Override
     public Result getResult(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<QuestionPossibleAnswers> qpa = getQuestionsWithPossibleAnswers();
+        List<QuestionSelectedAnswer> qsa = dao.QuestionSelectedAnswersData.getAll(user);
+        List<QuestionRightAnswer> qra = dao.QuestionRightAnswerData.getByUser(user);
+        
+        Result result = new Result();
+        result.setUser(user);
+        result.setQuestionsPossibleAnswers(qpa);
+        result.setSelectedAnswers(qsa);
+        result.setQuestionsRightAnswers(qra);
+
+        return result;
     }
 
 }
