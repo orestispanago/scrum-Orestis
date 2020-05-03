@@ -11,14 +11,23 @@ package models;
  */
 public class User {
     String username;
-
+    int id;
+    
     public User() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public User(String username) {
         this.username = username;
     }
-
+    
     public String getUsername() {
         return username;
     }

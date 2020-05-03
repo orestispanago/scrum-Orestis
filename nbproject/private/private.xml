@@ -4,10 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/src/java/dao/Database.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/src/java/models/Answer.java</file>
+            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/src/java/dao/ExamDao.java</file>
+            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/src/java/models/QuestionPossibleAnswers.java</file>
+            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/src/java/dao/IExamDao.java</file>
             <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/src/java/controllers/Exam.java</file>
             <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/src/java/dao/QuestionPossibleAnswers.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/src/java/models/Question.java</file>
         </group>
     </open-files>
 </project-private>

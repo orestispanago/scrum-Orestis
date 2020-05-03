@@ -133,14 +133,12 @@ public class Database {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public static void setPreparedstatement(String query) {
+    public static void setPreparedStatementWithKeys(String query) {
         try {
-            pst = connection.prepareStatement(query);
+            pst = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
 }

@@ -5,14 +5,9 @@
  */
 package services;
 
-import DummyData.DummyData;
-import java.util.ArrayList;
+import dao.ExamDaoImpl;
 import java.util.List;
-import models.Answer;
-import models.Question;
 import models.QuestionPossibleAnswers;
-import models.QuestionRightAnswer;
-import models.QuestionSelectedAnswer;
 import models.Result;
 import models.User;
 import models.UserAnswers;
@@ -23,51 +18,65 @@ import models.UserAnswers;
  */
 public class ExamImpl implements IExam {
 
+    private ExamDaoImpl examDao;
+
+    public ExamImpl() {
+        examDao = new ExamDaoImpl();
+    }
+
     @Override
     public List<QuestionPossibleAnswers> getQuestionsWithPossibleAnswers() {
-//        List<QuestionAnswers> questionAnswers = examDao.getQuestionAnswers();
-//        if (questionAnswers.size() == 0){
-//            // Oops, there are no questions
-//            return null;
-//        }
-//        return questionAnswers;
+        List<QuestionPossibleAnswers> qpas = examDao.getQuestionsWithPossibleAnswers();
+        if (qpas.size() == 0) {
+            // Oops, there are no questions
+            return null;
+        }
+        return qpas;
 
         // *********** TESTING ************
-        return DummyData.getQuestionsWithPossibleAnswers();
+//        return DummyData.getQuestionsWithPossibleAnswers();
     }
 
     @Override
     public boolean saveUserSelectedAnswers(UserAnswers userAnswers) {
-        //boolean saved = examDao.saveUserSelectedAnswers(userAnswers);
-//        if (!saved){
-//            //  oops something went wrong
-//            return false;
-//        }
-//        return true;
-        
-        // To be deleted
-        return false;
+        if (userAnswers == null) {
+            //  oops something went wrong
+            return false;
+        }
+
+        boolean saved = examDao.saveUserSelectedAnswers(userAnswers);
+        if (!saved) {
+            //  oops something went wrong
+            return false;
+        }
+        return true;
     }
 
     @Override
     public Result getResult(User user) {
-//        Result result = examDao.getResult(User user);
-//        if (result == null){
-//            // oops
-//            return null;
-//        }
-//        return result;
-
+        Result result = examDao.getResult(user);
+        if (result == null) {
+            // oops, something went wrong
+            return null;
+        }
+        return result;
 
         // *********** TESTING ************
-        return DummyData.getResult(user);
+//        return DummyData.getResult(user);
     }
 
     @Override
-    public boolean saveUser(User user){
-        // call saveUser from dao
-        
-        // To be deleted
-        return false;
+    public boolean saveUser(User user) {
+        if (user == null) {
+            // oops, something went wrong
+            return false;
+        }
+
+        boolean saved = examDao.saveUser(user);
+        if (!saved) {
+            //  oops something went wrong
+            return false;
+        }
+        return true;
     }
 }

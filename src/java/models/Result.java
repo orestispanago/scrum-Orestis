@@ -12,6 +12,7 @@ import java.util.List;
  * @author Walter
  */
 public class Result {
+
     private User user;
     private List<QuestionPossibleAnswers> questionsPossibleAnswers;
     private List<QuestionSelectedAnswer> selectedAnswers;
@@ -33,6 +34,20 @@ public class Result {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getTotalNumberOfQuestions() {
+        return this.questionsPossibleAnswers.size();
+    }
+
+    public int getNumberOfUserRightAnswers() {
+        int numberOfRightAnswers = 0;
+        for (int i = 0; i < questionsPossibleAnswers.size(); i++) {
+            if (selectedAnswers.get(i).getSelectedAnswer().equals(questionsRightAnswers.get(i).getRightAnswer())) {
+                numberOfRightAnswers++;
+            }
+        }
+        return numberOfRightAnswers;
     }
 
     public List<QuestionPossibleAnswers> getQuestionsPossibleAnswers() {
@@ -63,7 +78,5 @@ public class Result {
     public String toString() {
         return "Result{" + "user=" + user + ", questionsPossibleAnswers=" + questionsPossibleAnswers + ", selectedAnswers=" + selectedAnswers + ", questionsRightAnswers=" + questionsRightAnswers + '}';
     }
-    
-    
-}
 
+}

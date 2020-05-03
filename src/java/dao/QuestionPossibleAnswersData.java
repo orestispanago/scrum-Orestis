@@ -9,12 +9,12 @@ import java.util.logging.Logger;
 import models.Answer;
 import models.Question;
 
-public class QuestionPossibleAnswers {
+public class QuestionPossibleAnswersData {
 
     private static Database db = new Database();
 //        private  Database db;
 //   
-//    public QuestionPossibleAnswers(){
+//    public QuestionPossibleAnswersData(){
 //        db = new Database();
 //    }
 
@@ -34,37 +34,37 @@ public class QuestionPossibleAnswers {
                 + "        AND questions.id = " + id + ";");
     }
 
-    public static void printOne() {
-        ResultSet rs = getById(1);
-        String question = "";
-        String ans;
-        List<String> answers = new ArrayList();
-        try {
-            if (rs.next()) {
-                question = rs.getString(1);
-                ans = rs.getString(2);
-                answers.add(ans);
-            }
-            while (rs.next()) {
-                ans = rs.getString(2);
-                answers.add(ans);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println(question);
-        System.out.println(answers);
-    }
+//    public static void printOne() {
+//        ResultSet rs = getById(1);
+//        String question = "";
+//        String ans;
+//        List<String> answers = new ArrayList();
+//        try {
+//            if (rs.next()) {
+//                question = rs.getString(1);
+//                ans = rs.getString(2);
+//                answers.add(ans);
+//            }
+//            while (rs.next()) {
+//                ans = rs.getString(2);
+//                answers.add(ans);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        System.out.println(question);
+//        System.out.println(answers);
+//    }
 
-    public static void getOne() {
-        ResultSet rs = getById(1);
+    public static models.QuestionPossibleAnswers getOne(int id) {
+        ResultSet rs = getById(id);
         Question question = new Question();
         List<Answer> answers = new ArrayList();
         int ans_id;
         try {
             if (rs.next()) {
-                int id = rs.getInt(1);
-                question.setId(id);
+                int quest_id = rs.getInt(1);
+                question.setId(quest_id);
                 question.setText(rs.getString(2));
 
                 Answer answer = new Answer();
@@ -85,5 +85,8 @@ public class QuestionPossibleAnswers {
         }
         System.out.println(question);
         System.out.println(answers);
+        models.QuestionPossibleAnswers qpa = new models.QuestionPossibleAnswers(question, answers);
+        return qpa;
     }
+
 }
