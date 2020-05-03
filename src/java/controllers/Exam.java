@@ -69,7 +69,7 @@ public class Exam extends HttpServlet {
         // Get questions from databse (get dummy data for now)
 //        List<QuestionPossibleAnswers> questionsWithPossibleAnswers = examService.getQuestionsWithPossibleAnswers();
 //        dao.QuestionPossibleAnswers qa = new dao.QuestionPossibleAnswers();
-        dao.QuestionPossibleAnswers.printOne();
+        dao.QuestionPossibleAnswers.getOne();
     }
 
     /**

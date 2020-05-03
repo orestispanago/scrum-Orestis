@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Answer;
+import models.Question;
 
 public class QuestionPossibleAnswers {
 
@@ -15,6 +17,7 @@ public class QuestionPossibleAnswers {
 //    public QuestionPossibleAnswers(){
 //        db = new Database();
 //    }
+
     private static ResultSet getAll() {
         return db.getResults("SELECT * FROM questions ORDER BY id");
     }
@@ -22,7 +25,7 @@ public class QuestionPossibleAnswers {
     private static ResultSet getById(int id) {
         return db.getResults(
                 "SELECT \n"
-                + "    text_quest, text_ans\n"
+                + "    questions.id,text_quest, answers.id,text_ans\n"
                 + "FROM\n"
                 + "    questions,\n"
                 + "    answers\n"
@@ -45,6 +48,37 @@ public class QuestionPossibleAnswers {
             while (rs.next()) {
                 ans = rs.getString(2);
                 answers.add(ans);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(question);
+        System.out.println(answers);
+    }
+
+    public static void getOne() {
+        ResultSet rs = getById(1);
+        Question question = new Question();
+        List<Answer> answers = new ArrayList();
+        int ans_id;
+        try {
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                question.setId(id);
+                question.setText(rs.getString(2));
+
+                Answer answer = new Answer();
+                ans_id = rs.getInt(3);
+                answer.setId(ans_id);
+                answer.setText(rs.getString(4));
+                answers.add(answer);
+            }
+            while (rs.next()) {
+                Answer answer = new Answer();
+                ans_id = Integer.parseInt(rs.getString(3));
+                answer.setId(ans_id);
+                answer.setText(rs.getString(4));
+                answers.add(answer);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);

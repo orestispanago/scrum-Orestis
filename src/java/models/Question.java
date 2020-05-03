@@ -12,7 +12,7 @@ package models;
 public class Question {
     /* Fields */
     String text;
-
+    int id;
     /* Constructors */
     public Question() {
     }
@@ -20,7 +20,16 @@ public class Question {
         this.text = question;
     }
 
+    
+    public int getId() {
+        return id;
+    }
+
     /* Getters Setters */
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getText() {
         return text;
     }

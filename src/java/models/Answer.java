@@ -12,7 +12,7 @@ package models;
 public class Answer {
     /* Fields */
     String text;
-    
+    int id;
     /* Constructors */
     public Answer() {
     }
@@ -26,6 +26,14 @@ public class Answer {
     }
     public void setText(String text) {
         this.text = text;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     /* Methods */
