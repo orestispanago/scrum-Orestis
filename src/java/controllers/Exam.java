@@ -7,7 +7,12 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,12 +28,13 @@ import services.ExamImpl;
  * @author Walter
  */
 public class Exam extends HttpServlet {
+
     ExamImpl examService;
-    
-    public Exam(){
+
+    public Exam() {
         examService = new ExamImpl();
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,7 +52,7 @@ public class Exam extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Exam</title>");            
+            out.println("<title>Servlet Exam</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Exam at " + request.getContextPath() + "</h1>");
@@ -68,11 +74,8 @@ public class Exam extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get questions from databse (get dummy data for now)
-        List<QuestionPossibleAnswers> questionsWithPossibleAnswers = examService.getQuestionsWithPossibleAnswers();
-        // Send questions to front
-        request.setAttribute("questionsWithPossibleAnswers", questionsWithPossibleAnswers);
-        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-        rd.forward(request, response);
+//        List<QuestionPossibleAnswers> questionsWithPossibleAnswers = examService.getQuestionsWithPossibleAnswers();
+        dao.QuestionPossibleAnswers.printOne();
     }
 
     /**
@@ -87,12 +90,12 @@ public class Exam extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get user and selected answers from parameters
-        UserAnswers userAnswers = (UserAnswers)request.getAttribute("userAnswers");
+        UserAnswers userAnswers = (UserAnswers) request.getAttribute("userAnswers");
         User user = userAnswers.getUser();
         // Save to db via the examService
         examService.saveUser(user);
         examService.saveUserSelectedAnswers(userAnswers);
-       
+
         // Get Results
         examService.getResult(user);
         // Forward to index.jsp

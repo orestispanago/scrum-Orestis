@@ -19,10 +19,10 @@ public class Question {
     String questionText;
     @OneToMany(targetEntity = Answer.class)
     private List<Answer> possibleAnswers;
-    @OneToOne(targetEntity = Answer.class)
-    private Answer selectedAnswer;
-    @OneToOne(targetEntity = Answer.class)
-    private Answer rightAnswer;
+//    @OneToOne(targetEntity = Answer.class)
+//    private Answer selectedAnswer;
+//    @OneToOne(targetEntity = Answer.class)
+//    private Answer rightAnswer;
 
     public Question() {
     }
@@ -51,21 +51,21 @@ public class Question {
         this.possibleAnswers = possibleAnswers;
     }
 
-    public Answer getSelectedAnswer() {
-        return selectedAnswer;
-    }
-
-    public void setSelectedAnswer(Answer selectedAnswer) {
-        this.selectedAnswer = selectedAnswer;
-    }
-
-    public Answer getRightAnswer() {
-        return rightAnswer;
-    }
-
-    public void setRightAnswer(Answer rightAnswer) {
-        this.rightAnswer = rightAnswer;
-    }
+//    public Answer getSelectedAnswer() {
+//        return selectedAnswer;
+//    }
+//
+//    public void setSelectedAnswer(Answer selectedAnswer) {
+//        this.selectedAnswer = selectedAnswer;
+//    }
+//
+//    public Answer getRightAnswer() {
+//        return rightAnswer;
+//    }
+//
+//    public void setRightAnswer(Answer rightAnswer) {
+//        this.rightAnswer = rightAnswer;
+//    }
 
     
 }
