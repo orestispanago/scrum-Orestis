@@ -56,23 +56,29 @@ public class QuestionSelectedAnswersData {
         db.setPreparedStatementWithKeys(sql);
         PreparedStatement pst = db.getPreparedStatement();
         try {
+            System.out.println("************************************************");
+            System.out.println("user id: " + user.getId());
+            System.out.println("answer id: " + answer.getId());
+            System.out.println("************************************************");
+            
             pst.setInt(1, user.getId());
             pst.setInt(2, answer.getId());
+            System.out.println("*********************** pst:" + pst);
         } catch (SQLException ex) {
             Logger.getLogger(UserData.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             result = pst.executeUpdate();
-            if (result == 0) {
-                return false;
-            }
-            ResultSet rs = pst.getGeneratedKeys();
-            if (rs.next()) {
-                lastInsertId = rs.getInt(1);
-                System.out.println("Last insert ID =================" + lastInsertId);
-                user.setId(lastInsertId);
-                return true;
-            }
+            return true;
+//            if (result == 0) {
+//                return false;
+//            }
+//            ResultSet rs = pst.getGeneratedKeys();
+//            if (rs.next()) {
+//                lastInsertId = rs.getInt(1);
+//                user.setId(lastInsertId);
+//                return true;
+//            }
         } catch (SQLException ex) {
             Logger.getLogger(UserData.class.getName()).log(Level.SEVERE, null, ex);
         }

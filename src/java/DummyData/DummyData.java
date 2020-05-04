@@ -57,18 +57,15 @@ public class DummyData {
     
     public static List<QuestionSelectedAnswer> getQuestionsWithSelectedAnswers(){
         Question q1 = new Question("Question 1");
-        q1.setId(1);
-
+        Question q2 = new Question("Question 2");
         Answer selectedAnswerForQ1 = new Answer("Answer 1");
-        selectedAnswerForQ1.setId(1);
-//        Answer selectedAnswerForQ2 = new Answer("Answer 2");
-//        selectedAnswerForQ2.setId(22);
+        Answer selectedAnswerForQ2 = new Answer("Answer 2");
         
         QuestionSelectedAnswer q1SelectedAnswer = new QuestionSelectedAnswer(q1, selectedAnswerForQ1);
-        //QuestionSelectedAnswer q2SelectedAnswer = new QuestionSelectedAnswer(q2, selectedAnswerForQ2);
+        QuestionSelectedAnswer q2SelectedAnswer = new QuestionSelectedAnswer(q2, selectedAnswerForQ2);
         List<QuestionSelectedAnswer> selectedAnswers = new ArrayList();
         selectedAnswers.add(q1SelectedAnswer);
-        //selectedAnswers.add(q2SelectedAnswer);
+        selectedAnswers.add(q2SelectedAnswer);
         return selectedAnswers;
     }
     

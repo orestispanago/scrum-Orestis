@@ -5,7 +5,6 @@
  */
 package controllers;
 
-import dao.UserData;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,8 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.QuestionPossibleAnswers;
-import models.QuestionSelectedAnswer;
 import models.User;
 import models.UserAnswers;
 import services.ExamImpl;
@@ -25,37 +24,10 @@ import services.ExamImpl;
  * @author Walter
  */
 public class Exam extends HttpServlet {
-
     ExamImpl examService;
-
-    public Exam() {
+    
+    public Exam(){
         examService = new ExamImpl();
-    }
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Exam</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Exam at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -70,20 +42,14 @@ public class Exam extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Get questions from databse (get dummy data for now)
+         // Get questions from service
         List<QuestionPossibleAnswers> questionsWithPossibleAnswers = examService.getQuestionsWithPossibleAnswers();
-        System.out.println(questionsWithPossibleAnswers);
-        
-        User u1 = new User();
-        u1.setUsername("UserName");
-        examService.saveUser(u1);
-        
-        models.UserAnswers userAnswers = new models.UserAnswers();
-        List<QuestionSelectedAnswer> selectedAnswers = DummyData.DummyData.getQuestionsWithSelectedAnswers();
-        userAnswers.setUser(u1);
-        userAnswers.setSelectedAnswers(selectedAnswers);
-        examService.saveUserSelectedAnswers(userAnswers);
-            
+
+        // Send questions to front
+        HttpSession s = request.getSession();
+        s.setAttribute("questionsWithPossibleAnswers", questionsWithPossibleAnswers);
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
     }
 
     /**
@@ -98,16 +64,18 @@ public class Exam extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get user and selected answers from parameters
-        UserAnswers userAnswers = (UserAnswers) request.getAttribute("userAnswers");
+        HttpSession s = request.getSession();
+        UserAnswers userAnswers = (UserAnswers)s.getAttribute("userAnswers");
         User user = userAnswers.getUser();
+
         // Save to db via the examService
         examService.saveUser(user);
         examService.saveUserSelectedAnswers(userAnswers);
 
         // Get Results
-        examService.getResult(user);
+        s.setAttribute("result", examService.getResult(user));
         // Forward to index.jsp
-        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
     }
 

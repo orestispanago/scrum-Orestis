@@ -42,8 +42,11 @@ public class Result {
 
     public int getNumberOfUserRightAnswers() {
         int numberOfRightAnswers = 0;
+        System.out.println("****************** questionsPossibleAnswersListSize: " + questionsPossibleAnswers.size());
+        System.out.println("****************** selectedAnswers: " + selectedAnswers);
+        System.out.println("****************** rightAnswers: " + questionsRightAnswers);
         for (int i = 0; i < questionsPossibleAnswers.size(); i++) {
-            if (selectedAnswers.get(i).getSelectedAnswer().equals(questionsRightAnswers.get(i).getRightAnswer())) {
+            if (selectedAnswers.get(i).getSelectedAnswer().getText().equals(questionsRightAnswers.get(i).getRightAnswer().getText())) {
                 numberOfRightAnswers++;
             }
         }

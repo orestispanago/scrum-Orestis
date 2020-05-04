@@ -16,28 +16,15 @@ public class QuestionRightAnswerData {
 
     private static Database db = new Database();
 
-    private static ResultSet getById(int id) {
-        return db.getResults(
-                "SELECT \n"
-                + "    u.id, u.username, a.id, a.text_ans, q.id, q.text_quest\n"
-                + "FROM\n"
-                + "    users_answers ua\n"
-                + "        JOIN\n"
-                + "    answers a ON ua.answer_id = a.id\n"
-                + "        JOIN\n"
-                + "    questions q ON q.id = a.question_id\n"
-                + "        JOIN\n"
-                + "    users u ON u.id = ua.user_id\n"
-                + "        JOIN\n"
-                + "    right_answers ra\n"
-                + "WHERE\n"
-                + "    ra.question_id = a.question_id\n"
-                + "        AND ra.answer_id = ua.answer_id\n"
-                + "        AND u.id = " + id + ");");
+    private static ResultSet getRightAnswer() {
+        ResultSet rs = db.getResults("SELECT questions.text_quest,answers.text_ans FROM questions, answers, right_answers\n"
+                + "WHERE answers.id = right_answers.answer_id AND questions.id=right_answers.question_id");
+        System.out.println("********** resultset: " + rs);
+        return rs;
     }
 
-    public static List<QuestionRightAnswer> getByUser(User user) {
-        ResultSet rs = getById(user.getId());
+    public static List<QuestionRightAnswer> getAll() {
+        ResultSet rs = getRightAnswer();
         List<QuestionRightAnswer> qraList = new ArrayList();
         try {
             while (rs.next()) {
