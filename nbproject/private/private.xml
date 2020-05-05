@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/team_exc/src/java/services/ExamImpl.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/team_exc/src/java/dao/QuestionSelectedAnswersData.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/team_exc/src/java/dao/ExamDaoImpl.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/team_exc/src/java/models/Result.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/team_exc/src/java/dao/QuestionRightAnswerData.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/team_exc/src/java/models/QuestionRightAnswer.java</file>
-            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/team_exc/web/index.jsp</file>
+            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/src/java/dao/QuestionSelectedAnswersData.java</file>
+            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/src/java/models/Answer.java</file>
+            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/src/java/dao/QuestionRightAnswerData.java</file>
+            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/web/index.jsp</file>
+            <file>file:/home/orestis/Shared/Drafts/Bootcamp/Servlets/Exercises/scrum-Orestis/src/java/dao/Database.java</file>
         </group>
     </open-files>
 </project-private>

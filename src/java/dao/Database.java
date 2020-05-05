@@ -23,21 +23,6 @@ public class Database {
         getConnection();
     }
 
-//    public static Connection getConnection() {
-//        try {
-//            try {
-//                Class.forName("com.mysql.cj.jdbc.Driver");
-//            } catch (ClassNotFoundException ex) {
-//                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            connection = DriverManager.getConnection(FULL_DB_URL, DB_USER, DB_PASSWD);
-//            return connection;
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-//            return null;
-//        }
-//    }
-
        public static Connection getConnection() {
         try {
             try {
@@ -45,13 +30,9 @@ public class Database {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("***************** GETCONNECTION EXECUTED");
             connection = DriverManager.getConnection(FULL_DB_URL, DB_USER, DB_PASSWD);
-            System.out.println("***************** GETCONNECTION returns connection value: " + connection);
             return connection;
         } catch (SQLException ex) {
-            System.out.println("********************* ERROR IN GETCONNECTION");
-            System.out.println("");
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
@@ -66,33 +47,6 @@ public class Database {
             return null;
         }
     }
-
-    public static ResultSet getOneResult(String tableName, int id) {
-        try {
-            setStatement();
-            String query = "SELECT * FROM `" + tableName + "` WHERE `id`=" + id;
-            ResultSet rs = statement.executeQuery(query);
-            return rs;
-        } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
-
-    public static ResultSet getOneResultByField(String tableName, String fieldName, String fieldValue) {
-
-        try {
-            setStatement();
-            String query = "SELECT * FROM `" + tableName + "` WHERE `" + fieldName + "`=" + fieldValue;
-            ResultSet rs = statement.executeQuery(query);
-            return rs;
-        } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-
-    }
-
 
     public static Statement getStatement() {
         return statement;
