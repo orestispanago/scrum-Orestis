@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 /**
@@ -39,8 +34,9 @@ public class Answer {
     /* Methods */
     @Override
     public String toString() {
-        return "Answer{" + "text=" + text + '}';
+        return "Answer{" + "text=" + text + ", id=" + id + '}';
     }
+    
     
     
     

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
 import DummyData.DummyData;
@@ -43,10 +38,7 @@ public class ExamImpl implements IExam {
             //  oops something went wrong
             return false;
         }
-         System.out.println("************ SERVICE USER: " + userAnswers.getUser());
         boolean saved = examDao.saveUserSelectedAnswers(userAnswers);
-        System.out.println("************ SERVICE USER after: " + userAnswers.getUser());
-        System.out.println("************ examDao saved: " + saved);
        
         if (!saved){
             //  oops something went wrong

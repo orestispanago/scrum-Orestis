@@ -35,75 +35,68 @@
         <%
             Result result = (Result) (session.getAttribute("result"));
             //ArrayList<QuestionPossibleAnswers> questionPossibleAnswers = (ArrayList<QuestionPossibleAnswers>) (request.getAttribute("questionPossibleAnswers"));
+        
         %>
         <div class="container">
-            <h1>Exam</h1>
+            <div class="border rounded text-center mt-5">
+                <h1>Welcome to your Exam!</h1>
+            </div>
+            <div class="border rounded mt-3 mb-3">
+                <form action="index.jsp" method="POST">
+                    <div class="form-group text-center mt-2 p-3 ">
+                        <p class="bg-primary p-1 rounded text-white">Start by entering your username below</p>
+                        <label for="firstName"></label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter a Username" name="firstName" required>                    
+                    </div>
 
-            <form action="index.jsp" method="POST">
-                <div class="form-group">
-                    <label for="firstName">Username</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="Enter a Username" name="firstName" required>                    
-                </div>
 
+                    <div class="text-center p-3 ">
+                        <p class="bg-primary p-1 rounded text-white">Now it's time to answer the questions!</p>
+                    </div>
+                    <%  ArrayList<QuestionPossibleAnswers> questionPossibleAnswers = (ArrayList<QuestionPossibleAnswers>) (session.getAttribute("questionsWithPossibleAnswers"));
+                        for (int i = 1; i <= questionPossibleAnswers.size(); i++) {
+                            Question question = questionPossibleAnswers.get(i - 1).getQuestion();
+                            List<Answer> answers = questionPossibleAnswers.get(i - 1).getAnswers();
+                    %>
+                    <div class="form-group align-center tp-5 p-3" name='<%= i%>'>
+                        <div> <p> <%=i%>. <%= question.getText()%> </p></div>
 
+                        <% for (int j = 1; j <= answers.size(); j++) {%>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios<%=i%>" id="exampleRadios<%=i%>" value="<%=answers.get(j - 1).getText()%>">
+                            <label class="form-check-label" for="exampleRadios<%=i%>">
 
-                <%  ArrayList<QuestionPossibleAnswers> questionPossibleAnswers = (ArrayList<QuestionPossibleAnswers>) (session.getAttribute("questionsWithPossibleAnswers"));
-                    for (int i = 1; i <= questionPossibleAnswers.size(); i++) {
-                        Question question = questionPossibleAnswers.get(i - 1).getQuestion();
-                        List<Answer> answers = questionPossibleAnswers.get(i - 1).getAnswers();
-                %>
-                <div class="form-group align-center tp-5" name='<%= i%>'>
-                    <div> <p> <%=i%>. <%= question.getText()%> </p></div>
-
-                    <% for (int j = 1; j <= answers.size(); j++) {%>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios<%=i%>" id="exampleRadios<%=i%>" value="<%=answers.get(j - 1).getText()%>">
-                        <label class="form-check-label" for="exampleRadios<%=i%>">
-
-                            <%=j%>. <%= answers.get(j - 1).getText()%>
-                        </label>
+                                <%=j%>. <%= answers.get(j - 1).getText()%>
+                            </label>
+                        </div>
+                        <% } %>
                     </div>
                     <% } %>
-                </div>
-                <% } %>
-
-                <button type="submit" class="btn btn-primary">Save and Continue</button>
-            </form>
-
+                    <div class="row text-center p-3 justify-content-center">                        
+                        <button type="submit" class="btn btn-primary col-6">Click to get your score!</button>
+                    </div>
+                </form>
+            </div>
             <%if (request.getMethod().equals("POST") && result == null) {
-                System.out.println("siZZZZZZZZZZZZZZZZZZe of questionspossibleanswers");
-                System.out.println(questionPossibleAnswers);
                     User user = new User(request.getParameter("firstName"));
                     List<QuestionSelectedAnswer> questionSelectedAnswers = new ArrayList();
-                    Answer selectedAnswer = new Answer();
+                    // Answer selectedAnswer = new Answer(); LATHOS
                     for (int z = 1; z <= questionPossibleAnswers.size(); z++) {
                         QuestionPossibleAnswers qpa = questionPossibleAnswers.get(z - 1);
                         Question question = qpa.getQuestion();
                         List<Answer> answers = qpa.getAnswers();
-                        System.out.println("SSSSSSSSSSSSSize of answers");
-                        System.out.println(answers.size());
                         for (int v = 0; v < answers.size(); v++) {
-                            System.out.println("&&&&&&&&&&&&&&&&_______________");
-                            System.out.println(answers.get(v).getText());
-                            System.out.println(request.getParameter("exampleRadios" + z));
                             if (answers.get(v).getText().equals(request.getParameter("exampleRadios" + z))) {
+                                Answer selectedAnswer = new Answer();
                                 selectedAnswer.setText(request.getParameter("exampleRadios" + z));
-                                System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-                                System.out.println("selected answerrrrr"+selectedAnswer.toString());
-                                selectedAnswer.setId(questionPossibleAnswers.get(z - 1).getAnswers().get(v).getId());
-                                System.out.println("selected answer with iddd"+selectedAnswer.toString());
+                                selectedAnswer.setId(answers.get(v).getId());
+                                QuestionSelectedAnswer questionSelectedAnswer = new QuestionSelectedAnswer(question, selectedAnswer);
+                                questionSelectedAnswers.add(questionSelectedAnswer);
                             }
                         }
-//                        Question question = questionPossibleAnswers.get(z - 1).getQuestion();
-//                        for (int q = 0; q < questionPossibleAnswers.get(z-1).getAnswers().size(); q++){
-//                            if (questionPossibleAnswers.get(z-1).getAnswers().get(q).getText().equals(request.getParameter("exampleRadios" + z))){
-//                                 selectedAnswer.setText(request.getParameter("exampleRadios" + z));
-//                                 selectedAnswer.setId(questionPossibleAnswers.get(z-1).getAnswers().get(q).getId());
-//                            }
-//                        }
 
-                        QuestionSelectedAnswer questionSelectedAnswer = new QuestionSelectedAnswer(question, selectedAnswer);
-                        questionSelectedAnswers.add(questionSelectedAnswer);
+                        // questionSelectedAnswers.add(questionSelectedAnswer); LATHOS
+                        //System.out.println("------- questionSelectedAnswersList: " + questionSelectedAnswers); LATHOS
                     }
 
                     UserAnswers userAnswers = new UserAnswers(user, questionSelectedAnswers);
@@ -116,16 +109,25 @@
 
             <% if (result != null) {
                     int counter = 0;
+                    for (int x = 0; x < questionPossibleAnswers.size(); x++) {
+                        String selected = result.getSelectedAnswers().get(x).getSelectedAnswer().getText();
+                        String right = result.getQuestionsRightAnswers().get(x).getRightAnswer().getText();
+                        if (selected.equals(right)) {
+                            counter++;
+                        }
+                    }
 
-                    //     for (int x = 0; x < questionPossibleAnswers.size(); x++) {
-//                        String selected = result.getSelectedAnswers().get(x).getSelectedAnswer().getText();
-//                        String right = result.getQuestionsRightAnswers().get(x).getRightAnswer().getText();
-//                        if (selected.equals(right)) {
-//                            counter++;
-//                        }
-//                    }
-//                    out.println("<h1>Your score is: " + counter + " out of " + questionPossibleAnswers.size() + "</h1>");
-                    out.println("<h1>Your score is: " + result.getNumberOfUserRightAnswers() + " out of " + result.getTotalNumberOfQuestions() + "</h1>");
+                    if(counter <= questionPossibleAnswers.size() / 2.0) {
+                    out.println("<h3 class ='text-center'>Your score is: " + counter + " out of " + questionPossibleAnswers.size() + "</h3>");
+                    out.println("<div class = 'bg-danger text-center rounded p-1 mb-4'>"
+                            + "<h1 class =''>We are sorry, you failed</h1>"
+                            + "</div>");
+                    } else {
+                        out.println("<h3 class ='text-center'>Your score is: " + counter + " out of " + questionPossibleAnswers.size() + "</h3>");
+                    out.println("<div class = 'bg-success text-center rounded p-1 mb-4'>"
+                            + "<h1 class =''>Congratulations, you passed!</h1>"
+                            + "</div>");
+                    }
 
                 }
             %>

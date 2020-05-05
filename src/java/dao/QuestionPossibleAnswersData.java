@@ -48,7 +48,7 @@ public class QuestionPossibleAnswersData {
             }
             while (rs.next()) {
                 Answer answer = new Answer();
-                ans_id = Integer.parseInt(rs.getString(3));
+                ans_id = rs.getInt(3);
                 answer.setId(ans_id);
                 answer.setText(rs.getString(4));
                 answers.add(answer);
@@ -56,9 +56,8 @@ public class QuestionPossibleAnswersData {
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(question);
-        System.out.println(answers);
         models.QuestionPossibleAnswers qpa = new models.QuestionPossibleAnswers(question, answers);
+        
         return qpa;
     }
 

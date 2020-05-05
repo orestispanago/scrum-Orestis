@@ -3,7 +3,6 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +29,6 @@ public class UserData {
             ResultSet rs = pst.getGeneratedKeys();
             if (rs.next()) {
                 lastInsertId = rs.getInt(1);
-                System.out.println("Last insert ID =================" + lastInsertId);
                 user.setId(lastInsertId);
                 return true;
             }

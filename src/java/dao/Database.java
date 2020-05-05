@@ -33,6 +33,7 @@ public class Database {
             connection = DriverManager.getConnection(FULL_DB_URL, DB_USER, DB_PASSWD);
             return connection;
         } catch (SQLException ex) {
+            System.out.println("");
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }

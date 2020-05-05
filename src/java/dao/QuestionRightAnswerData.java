@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.logging.Logger;
 import models.Answer;
 import models.Question;
 import models.QuestionRightAnswer;
-import models.User;
 
 public class QuestionRightAnswerData {
 
@@ -19,7 +17,6 @@ public class QuestionRightAnswerData {
     private static ResultSet getRightAnswer() {
         ResultSet rs = db.getResults("SELECT questions.text_quest,answers.text_ans FROM questions, answers, right_answers\n"
                 + "WHERE answers.id = right_answers.answer_id AND questions.id=right_answers.question_id");
-        System.out.println("********** resultset: " + rs);
         return rs;
     }
 
